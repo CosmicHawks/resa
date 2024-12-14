@@ -1,0 +1,22 @@
+const Web3 = require('web3');
+
+// Initialize Web3 instance
+const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'); // Use your own Infura project ID or another RPC provider
+
+// Set up the contract ABI and address
+const contractABI = [ /* Your contract's ABI here */ ];
+const contractAddress = '0xYourContractAddressHere';
+
+// Initialize the contract
+const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+// Listen for an event (example: "Transfer" event)
+contract.events.Transfer({
+  fromBlock: 'latest',  // You can set the block range
+}, (error, event) => {
+  if (error) {
+    console.error('Error listening for event:', error);
+  } else {
+    console.log('New Transfer Event:', event);
+  }
+});
